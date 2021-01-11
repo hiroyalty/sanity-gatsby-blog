@@ -5,13 +5,14 @@ import {StaticQuery, graphql} from 'gatsby'
 import {imageUrlFor} from '../lib/image-url'
 import {buildImageObj} from '../lib/helpers'
 
-function SEO ({description, lang, meta, keywords, title, image}) {
+function SEO ({description, lang, meta, keywords, title, subtitle, image}) {
   return (
     <StaticQuery
       query={detailsQuery}
       render={data => {
         const metaDescription = description || (data.site && data.site.description) || ''
         const siteTitle = (data.site && data.site.title) || ''
+        // const siteSubtitle = (data.site && data.site.subtitle) || ''
         const siteAuthor = (data.site && data.site.author && data.site.author.name) || ''
         const metaImage = (image && image.asset) ? imageUrlFor(buildImageObj(image)).width(1200).url() : ''
 
@@ -19,6 +20,7 @@ function SEO ({description, lang, meta, keywords, title, image}) {
           <Helmet
             htmlAttributes={{lang}}
             title={title}
+            subtitle={subtitle}
             titleTemplate={title === siteTitle ? '%s' : `%s | ${siteTitle}`}
             meta={[
               {
@@ -85,7 +87,8 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.array,
   keywords: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string
 }
 
 export default SEO
@@ -94,6 +97,7 @@ const detailsQuery = graphql`
   query DefaultSEOQuery {
     site: sanitySiteSettings(_id: {eq: "siteSettings"}) {
       title
+      subtitle
       description
       keywords
       author {
