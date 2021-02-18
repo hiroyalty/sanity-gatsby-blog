@@ -22,6 +22,12 @@ export default {
       }
     },
     {
+      name: 'pageHeading',
+      type: 'string',
+      title: 'Heading',
+      description: 'Heading that is displayed in the view, catchy and descriptive'
+    },
+    {
       name: 'publishedAt',
       type: 'datetime',
       title: 'Published at',
@@ -66,6 +72,12 @@ export default {
       name: 'body',
       type: 'bodyPortableText',
       title: 'Body'
+    },
+    {
+      name: 'readTime',
+      type: 'number',
+      title: 'Read Time',
+      description: 'How many minutes it takes to read the blog'
     }
   ],
   orderings: [
